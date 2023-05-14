@@ -5,7 +5,6 @@ from block import Block
 from block import BlockImages
 from block import BlockStructures
 import random
-import pathlib
 import os
 colorDict = {
     'SINGLE': (38, 208, 255),
@@ -55,9 +54,12 @@ class tetrisManager:
         self.fieldSpriteGroup = pg.sprite.Group()
         self.gameOver = False
         self.UISpriteGroup = pg.sprite.Group()
-        self.nextUI = UIImage(pg.transform.scale(pg.image.load(pathlib.Path(os.path.abspath('assets/sprites/UI/NextUI.png'))).convert_alpha(),
-                                               (self.tileSize * 14, self.tileSize * 14)), self.UISpriteGroup)
-        self.blockProjectionImage = pg.transform.scale(pg.image.load(pathlib.Path(os.path.abspath('assets/sprites/UI/blockProjection.png'))).convert_alpha(), (self.tileSize, self.tileSize))
+        # self.nextUI = UIImage(pg.transform.scale(pg.image.load(pathlib.Path(os.path.abspath('assets/sprites/UI/NextUI.png'))).convert_alpha(),
+        #                                        (self.tileSize * 14, self.tileSize * 14)), self.UISpriteGroup)
+        self.nextUI = UIImage(pg.transform.scale(
+            pg.image.load('assets/sprites/UI/NextUI.png').convert_alpha(), (self.tileSize * 14, self.tileSize * 14)), self.UISpriteGroup)
+        # self.blockProjectionImage = pg.transform.scale(pg.image.load(pathlib.Path(os.path.abspath('assets/sprites/UI/blockProjection.png'))).convert_alpha(), (self.tileSize, self.tileSize))
+        self.blockProjectionImage = pg.transform.scale(pg.image.load('assets/sprites/UI/blockProjection.png').convert_alpha(), (self.tileSize, self.tileSize))
         self.blockProjection = None
         self.score = 0
         self.visScore = 0

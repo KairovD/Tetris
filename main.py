@@ -3,7 +3,6 @@ import random
 import pygame as pg
 from pygame import freetype as ft
 import sys
-import pathlib
 from gameManager import tetrisManager as tm
 from gameManager import UIImage
 import os
@@ -45,7 +44,8 @@ class Game:
         self.backgroundGroup = pg.sprite.Group()
         self.backgrounds = self.load_backgrounds()
         self.backGround = Background(self.backgrounds[random.randrange(0, len(self.backgrounds) - 1)])
-        self.blockIcon = pg.transform.scale(pg.image.load(pathlib.Path(os.path.abspath('assets/sprites/UI/BlockIcon.png'))).convert_alpha(), (self.tileSize, self.tileSize))
+        # self.blockIcon = pg.transform.scale(pg.image.load(pathlib.Path(os.path.abspath('assets/sprites/UI/BlockIcon.png'))).convert_alpha(), (self.tileSize, self.tileSize))
+        self.blockIcon = pg.transform.scale(pg.image.load('assets/sprites/UI/BlockIcon.png').convert_alpha(), (self.tileSize, self.tileSize))
 
         self.font = ft.Font(os.path.abspath('assets/fonts/FiraSans-Bold.ttf'))
         self.lineClearedSound = pg.mixer.Sound('assets/sounds/Lineclear.wav')
@@ -104,15 +104,25 @@ class Game:
         return
 
     def load_backgrounds(self):
-        files = [item for item in pathlib.Path(os.path.abspath('assets/sprites/backgrounds')).rglob('*.png') if item.is_file()]
-        images = [pg.image.load(file).convert_alpha() for file in files]
-        images = [pg.transform.scale(image, (self.screen.get_width(), self.screen.get_height())) for image in images]
+        # files = [item for item in pathlib.Path(os.path.abspath('assets/sprites/backgrounds')).rglob('*.png') if item.is_file()]
+        # images = [pg.image.load(file).convert_alpha() for file in files]
+        # images = [pg.transform.scale(image, (self.screen.get_width(), self.screen.get_height())) for image in images]
+        # return images
+        images = []
+        for filename in os.listdir('assets/sprites/backgrounds'):
+            if filename.endswith('.png'):
+                path = os.path.join('assets/sprites/backgrounds', filename)
+                images.append(pg.transform.scale(pg.image.load(path).convert_alpha(), (self.screen.get_width(), self.screen.get_height())))
         return images
     def load_sprites(self):
-        # files = [item for item in pathlib.Path('C:/Users\Admin\Favorites\Ссылки\Everything\FuckingShit\Tetris/assets\sprites').rglob('*.png') if item.is_file()]
-        files = [item for item in pathlib.Path(os.path.abspath('assets/sprites')).rglob('*.png') if item.is_file()]
-        images = [pg.image.load(file).convert_alpha() for file in files]
-        images = [pg.transform.scale(image, (self.tileSize, self.tileSize)) for image in images]
+        # files = [item for item in pathlib.Path(os.path.abspath('assets/sprites')).rglob('*.png') if item.is_file()]
+        # images = [pg.image.load(file).convert_alpha() for file in files]
+        # images = [pg.transform.scale(image, (self.tileSize, self.tileSize)) for image in images]
+        images = []
+        for filename in os.listdir('assets/sprites'):
+            if filename.endswith('.png'):
+                path = os.path.join('assets/sprites', filename)
+                images.append(pg.transform.scale(pg.image.load(path).convert_alpha(), (self.tileSize, self.tileSize)))
         return images
 
     def draw(self):

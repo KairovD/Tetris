@@ -1,1 +1,1 @@
-{"BestScore": 45, "PrevScore": 40}
+{"BestScore": 0, "PrevScore": 0}
