@@ -77,6 +77,7 @@ class Block:
             if block.checkCollision() is True:
                 failed = True
         if failed:
+            #t-bloody spin
             if self.tryMovePosition(np.matrix('-1; 0')) or self.tryMovePosition(np.matrix('1; 0')) or self.tryMovePosition(np.matrix('0; 1')) or self.tryMovePosition(np.matrix('1; 1')) or self.tryMovePosition(np.matrix('-1; 1')) or self.tryMovePosition(np.matrix('0; -1')) or self.tryMovePosition(np.matrix('-2; 0')) or self.tryMovePosition(np.matrix('2; 0')):
                 return True
             for block in self.blocks:
